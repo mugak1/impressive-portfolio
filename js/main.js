@@ -17,6 +17,19 @@ const installLink = document.getElementById('installPWA');
 const qs = (sel, el=document) => el.querySelector(sel);
 const qsa = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function resizeCanvasToContainer(canvas) {
+  if (!canvas) return;
+  const ratio = Math.min(2, window.devicePixelRatio || 1);
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(1, Math.floor(rect.width));
+  const h = Math.max(1, Math.floor(rect.height));
+  const newW = Math.floor(w * ratio);
+  const newH = Math.floor(h * ratio);
+  if (canvas.width !== newW || canvas.height !== newH) {
+    canvas.width = newW;
+    canvas.height = newH;
+  }
+}
 
 // ====== Navigation ======
 navToggle?.addEventListener('click', () => {
@@ -122,24 +135,29 @@ copyEmailBtn?.addEventListener('click', async () => {
 (function drawHero() {
   if (!heroCanvas) return;
   const ctx = heroCanvas.getContext('2d');
-  const w = heroCanvas.width, h = heroCanvas.height;
   let t = 0;
+
   function loop() {
+    resizeCanvasToContainer(heroCanvas);
+    const w = heroCanvas.width, h = heroCanvas.height;
     ctx.clearRect(0,0,w,h);
     const cx = w/2, cy = h/2;
-    for (let i=0;i<90;i++) {
+
+    for (let i=0; i<90; i++) {
       const angle = (i/90) * Math.PI * 2 + t*0.01;
-      const r = 80 + 40*Math.sin(t*0.02 + i);
+      const base = Math.min(w, h) * 0.18;
+      const r = base + 40 * Math.sin(t*0.02 + i);
       const x = cx + Math.cos(angle) * (r + i*2);
       const y = cy + Math.sin(angle) * (r + i*2);
       ctx.beginPath();
-      ctx.arc(x,y, Math.max(1, (i%7)+1), 0, Math.PI*2);
+      ctx.arc(x, y, Math.max(1, (i%7) + 1), 0, Math.PI*2);
       ctx.fillStyle = `hsl(${(i*4 + t)%360} 80% 60% / 0.6)`;
       ctx.fill();
     }
     t += 1;
     if (!prefersReducedMotion) requestAnimationFrame(loop);
   }
+
   if (!prefersReducedMotion) loop();
 })();
 
@@ -169,53 +187,64 @@ if ('serviceWorker' in navigator) {
 (function drawSkills() {
   const el = document.getElementById('skillsChart');
   if (!el) return;
-  const ctx = el.getContext('2d');
-  const center = { x: el.width/2, y: el.height/2 };
+
   const labels = ['CSS','JS','A11y','Perf','Tooling'];
   const values = [95, 90, 100, 92, 85];
-  const R = 140;
 
-  ctx.font = '14px system-ui';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  function render() {
+    resizeCanvasToContainer(el);
+    const ctx = el.getContext('2d');
+    const cx = el.width / 2, cy = el.height / 2;
+    const R = Math.min(el.width, el.height) * 0.38;
 
-  // grid
-  ctx.strokeStyle = 'rgba(127,127,153,.3)';
-  for (let r=30; r<=R; r+=30) {
-    ctx.beginPath();
-    for (let i=0;i<labels.length;i++) {
+    ctx.clearRect(0,0,el.width, el.height);
+    ctx.font = `${Math.max(10, Math.round(el.width * 0.02))}px system-ui`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // grid
+    ctx.strokeStyle = 'rgba(127,127,153,.3)';
+    for (let step=1; step<=5; step++) {
+      const r = (R/5)*step;
+      ctx.beginPath();
+      for (let i=0; i<labels.length; i++) {
+        const a = (i/labels.length) * Math.PI*2 - Math.PI/2;
+        const x = cx + Math.cos(a)*r;
+        const y = cy + Math.sin(a)*r;
+        if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.closePath(); ctx.stroke();
+    }
+
+    // axes + labels
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#000';
+    for (let i=0; i<labels.length; i++) {
       const a = (i/labels.length) * Math.PI*2 - Math.PI/2;
-      const x = center.x + Math.cos(a)*r;
-      const y = center.y + Math.sin(a)*r;
+      ctx.beginPath(); ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(a)*R, cy + Math.sin(a)*R);
+      ctx.stroke();
+      const lx = cx + Math.cos(a)*(R+18);
+      const ly = cy + Math.sin(a)*(R+18);
+      ctx.fillText(labels[i], lx, ly);
+    }
+
+    // values polygon
+    ctx.beginPath();
+    for (let i=0; i<labels.length; i++) {
+      const a = (i/labels.length) * Math.PI*2 - Math.PI/2;
+      const r = (values[i]/100) * R;
+      const x = cx + Math.cos(a)*r;
+      const y = cy + Math.sin(a)*r;
       if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
     }
-    ctx.closePath(); ctx.stroke();
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(91,124,250,.25)';
+    ctx.strokeStyle = 'rgba(91,124,250,.8)';
+    ctx.lineWidth = 2;
+    ctx.fill(); ctx.stroke();
   }
 
-  // axes + labels
-  ctx.fillStyle = 'var(--text)';
-  for (let i=0;i<labels.length;i++) {
-    const a = (i/labels.length) * Math.PI*2 - Math.PI/2;
-    ctx.beginPath(); ctx.moveTo(center.x, center.y);
-    ctx.lineTo(center.x + Math.cos(a)*R, center.y + Math.sin(a)*R);
-    ctx.stroke();
-    const lx = center.x + Math.cos(a)*(R+18);
-    const ly = center.y + Math.sin(a)*(R+18);
-    ctx.fillText(labels[i], lx, ly);
-  }
-
-  // poly
-  ctx.beginPath();
-  for (let i=0;i<labels.length;i++) {
-    const a = (i/labels.length) * Math.PI*2 - Math.PI/2;
-    const r = (values[i]/100)*R;
-    const x = center.x + Math.cos(a)*r;
-    const y = center.y + Math.sin(a)*r;
-    if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  }
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(91,124,250,.25)';
-  ctx.strokeStyle = 'rgba(91,124,250,.8)';
-  ctx.lineWidth = 2;
-  ctx.fill(); ctx.stroke();
+  render();
+  window.addEventListener('resize', render, { passive: true });
 })();
+
