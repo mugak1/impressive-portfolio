@@ -27,10 +27,15 @@ navToggle?.addEventListener('click', () => {
 
 // ====== Theme ======
 const THEME_KEY = 'theme';
+function setMetaTheme(color) {
+  document.querySelectorAll('meta[name="theme-color"]')
+    .forEach(m => m.setAttribute('content', color));
+}
 function setTheme(next) {
   document.documentElement.dataset.theme = next;
-  themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
+  themeToggle?.setAttribute('aria-pressed', String(next === 'dark'));
   localStorage.setItem(THEME_KEY, next);
+  setMetaTheme(next === 'dark' ? '#0b0b10' : '#ffffff');
 }
 themeToggle?.addEventListener('click', () => {
   const current = document.documentElement.dataset.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
