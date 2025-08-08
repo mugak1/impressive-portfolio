@@ -172,6 +172,51 @@ a:hover { text-decoration: underline; }
 @media (max-width: 900px) {
   .skills { grid-template-columns: 1fr; }
 }
+/* ===== Mobile upgrades ===== */
+
+/* 1) Mobile nav as a drop-down sheet */
+@media (max-width: 819px) {
+  .nav { position: relative; grid-template-columns: auto 1fr auto; }
+  .menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 12px;
+    left: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    display: grid;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .menu[data-collapsed="true"] { display: none; }
+  .menu li a, .menu .theme-toggle { display: block; padding: 12px 14px; }
+}
+
+/* 2) Hero canvas scales with the container */
+.hero-visual { aspect-ratio: 4 / 3; position: relative; min-height: auto; }
+#heroCanvas { width: 100%; height: 100%; display: block; }
+
+/* 3) Filters & chips behave on small screens */
+@media (max-width: 600px) { .filters { grid-template-columns: 1fr; } }
+.chips { overflow-x: auto; white-space: nowrap; padding-bottom: 6px; }
+
+/* 4) Buttons stack on very small screens; wrap metrics */
+@media (max-width: 480px) {
+  .cta { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .metrics { flex-wrap: wrap; }
+}
+
+/* 5) Modal fits the mobile viewport */
+.modal { max-width: 92vw; max-height: 90dvh; }
+.modal .modal-content { overflow: auto; }
+
+/* 6) Skills chart scales to container width */
+#skillsChart { width: 100%; height: auto; display: block; }
+
+/* 7) Respect iPhone notch area on sticky header */
+.site-header { padding-top: max(0px, env(safe-area-inset-top)); }
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--muted); }
