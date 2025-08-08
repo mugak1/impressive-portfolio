@@ -23,6 +23,30 @@
     --shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 }
+/* Manual theme overrides (take precedence over system preference) */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --text: #0b0b10;
+  --muted: #5a5f6a;
+  --card: #f5f7fb;
+  --border: #e7ebf3;
+  --brand: #5b7cfa;
+  --accent: #7bdfc5;
+  --shadow: 0 10px 30px rgba(11,11,16,0.06);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0b10;
+  --text: #e9ecf4;
+  --muted: #a6adbb;
+  --card: #111319;
+  --border: #222634;
+  --brand: #7c96ff;
+  --accent: #86f0d3;
+  --shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
 
 html { scroll-behavior: smooth; }
 * { box-sizing: border-box; }
