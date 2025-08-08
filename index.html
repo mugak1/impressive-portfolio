@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alex Dev — Frontend Engineer</title>
+  <meta name="description" content="A modern, blazing-fast frontend portfolio showcasing projects, performance, and craftsmanship." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b10">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Alex Dev — Frontend Engineer" />
+  <meta property="og:description" content="A modern, blazing-fast frontend portfolio showcasing projects, performance, and craftsmanship." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/icons/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alex Dev",
+    "url": "https://example.com",
+    "jobTitle": "Frontend Engineer",
+    "sameAs": [
+      "https://github.com/your-username",
+      "https://www.linkedin.com/in/your-profile"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="logo" href="#top" aria-label="Home">
+        <span class="logo-mark" aria-hidden="true">◆</span>
+        <span class="logo-text">Alex<span class="accent">Dev</span></span>
+      </a>
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryMenu">
+        <span class="sr-only">Toggle menu</span>
+        ☰
+      </button>
+      <ul id="primaryMenu" class="menu" data-collapsed="true">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">
+            <span class="sr-only">Toggle dark mode</span>🌓
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero container">
+      <div class="hero-text">
+        <h1><span class="hi">Hi, I’m</span> <span class="name">Alex Dev</span></h1>
+        <p class="tagline">
+          I craft <span class="highlight">performant</span>, <span class="highlight">accessible</span>, and
+          <span class="highlight">delightful</span> web experiences.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+
+        <ul class="metrics" role="list">
+          <li><strong>100</strong> A11y score</li>
+          <li><strong>0.7s</strong> LCP</li>
+          <li><strong>3ms</strong> input delay</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <canvas id="heroCanvas" width="680" height="520"></canvas>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section container">
+      <header class="section-header">
+        <h2>Selected Projects</h2>
+        <p>Hand-picked work emphasizing UX finesse, performance, and modern web APIs.</p>
+        <div class="filters">
+          <input id="projectSearch" type="search" placeholder="Search projects…" aria-label="Search projects" />
+          <div class="chips" role="group" aria-label="Filter by tag">
+            <button class="chip active" data-tag="all">All</button>
+            <button class="chip" data-tag="webapp">Web App</button>
+            <button class="chip" data-tag="pwa">PWA</button>
+            <button class="chip" data-tag="data-viz">Data‑Viz</button>
+            <button class="chip" data-tag="ui">UI</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="projectGrid" class="grid" aria-live="polite"></div>
+
+      <dialog id="projectModal" class="modal" aria-label="Project details">
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-content"></div>
+      </dialog>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section container">
+      <header class="section-header">
+        <h2>About</h2>
+      </header>
+      <div class="about-grid">
+        <div>
+          <p>
+            I’m a frontend specialist focused on creating resilient interfaces that feel instant,
+            look sharp, and work for everyone. I sweat the details: semantics, color contrast,
+            motion preferences, and Core Web Vitals.
+          </p>
+          <p>
+            My toolkit spans modern CSS (Grid, clamp, container queries), Web Components,
+            IntersectionObserver, Canvas, and progressive enhancement. I love turning
+            complicated UX into elegant interactions.
+          </p>
+        </div>
+        <ul class="timeline" role="list">
+          <li><span>2025</span> Built high-performance UI systems for complex dashboards</li>
+          <li><span>2024</span> Led PWA initiatives with offline, installable web apps</li>
+          <li><span>2023</span> Shipped accessible design systems and design tokens</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section container">
+      <header class="section-header">
+        <h2>Skills</h2>
+      </header>
+      <div class="skills">
+        <canvas id="skillsChart" width="600" height="380" role="img" aria-label="Skill radar chart"></canvas>
+        <ul class="skill-list" role="list">
+          <li><strong>CSS Mastery</strong> — Grid, Flexbox, clamp, container queries, custom properties</li>
+          <li><strong>JavaScript</strong> — Web Components, Canvas, performance profiling</li>
+          <li><strong>Accessibility</strong> — WCAG, keyboard traps, focus management</li>
+          <li><strong>Performance</strong> — Lighthouse, Core Web Vitals, code-splitting</li>
+          <li><strong>Tooling</strong> — Vite, ESLint, Prettier, GitHub Actions</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <header class="section-header">
+        <h2>Contact</h2>
+        <p>Let’s build something great together.</p>
+      </header>
+      <div class="contact">
+        <a class="btn primary" href="mailto:your.email@example.com">Email me</a>
+        <button class="btn" id="copyEmail" data-email="your.email@example.com">Copy email</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Alex Dev. Built with semantic HTML, modern CSS, and vanilla JS.</p>
+      <p><a href="#" id="installPWA" hidden>Install App</a></p>
+    </div>
+  </footer>
+
+  <script src="js/components/modal.js" type="module"></script>
+  <script src="js/components/project-card.js" type="module"></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>

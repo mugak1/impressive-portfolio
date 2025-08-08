@@ -1,0 +1,106 @@
+[
+  {
+    "title": "Neon Tasker",
+    "description": "Offline\u2011first task app with background sync, optimistic UI, and push notifications.",
+    "longDescription": "Neon Tasker is a PWA with install support, background sync, and a resilient offline experience. It uses IndexedDB for storage and progressive enhancement for notifications.",
+    "tags": [
+      "webapp",
+      "pwa",
+      "ui"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "Performance 100 \u2022 Accessibility 100 \u2022 Best Practices 100 \u2022 PWA Ready",
+    "highlights": [
+      "PWA installable",
+      "Offline caching",
+      "Background sync",
+      "Accessible modals"
+    ]
+  },
+  {
+    "title": "Aether Charts",
+    "description": "Canvas\u2011based charting playground with 120 FPS interactions and lazy data loading.",
+    "longDescription": "Aether Charts showcases high-performance Canvas drawings, dynamic sampling, and input latency under 10ms.",
+    "tags": [
+      "data-viz",
+      "webapp"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "Performance 100 \u2022 Accessibility 100",
+    "highlights": [
+      "Canvas rendering",
+      "Async workers",
+      "Zoom & pan"
+    ]
+  },
+  {
+    "title": "Pulse UI Kit",
+    "description": "Accessible component library built on Web Components with tokens and themes.",
+    "longDescription": "Pulse UI Kit demonstrates semantic component APIs, focus guards, ARIA correctness, and CSS custom properties for theming.",
+    "tags": [
+      "ui",
+      "webapp"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "A11y 100 \u2022 Best Practices 100",
+    "highlights": [
+      "Design tokens",
+      "Web Components",
+      "Themeable"
+    ]
+  },
+  {
+    "title": "Glide Maps",
+    "description": "Smooth, GPU\u2011accelerated map interactions with inertial panning and clustering.",
+    "longDescription": "Glide Maps uses requestAnimationFrame loops, spatial indexing, and cluster aggregation for silky navigations.",
+    "tags": [
+      "webapp",
+      "data-viz"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "Performance 99 \u2022 Accessibility 100",
+    "highlights": [
+      "Spatial indexing",
+      "Clustered markers",
+      "GPU transforms"
+    ]
+  },
+  {
+    "title": "Voyager Notes",
+    "description": "Markdown note editor with live preview, autosave, and export to PDF.",
+    "longDescription": "Voyager Notes offers a minimal note-taking interface with keyboard shortcuts, instant preview, and client-side PDF export.",
+    "tags": [
+      "webapp",
+      "ui"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "A11y 100 \u2022 Best Practices 100",
+    "highlights": [
+      "Autosave",
+      "Shortcuts",
+      "PDF export"
+    ]
+  },
+  {
+    "title": "Nimbus Gallery",
+    "description": "Responsive image gallery with view transitions and prefetching for near\u2011instant nav.",
+    "longDescription": "Nimbus Gallery highlights buttery navigation using the View Transitions API and link prefetching for perceived instant loads.",
+    "tags": [
+      "ui",
+      "pwa"
+    ],
+    "demo": "#",
+    "github": "#",
+    "lighthouse": "Performance 100 \u2022 Accessibility 100 \u2022 PWA Ready",
+    "highlights": [
+      "View Transitions",
+      "Prefetching",
+      "Responsive images"
+    ]
+  }
+]
